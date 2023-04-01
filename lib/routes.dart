@@ -1,5 +1,5 @@
 enum Routes {
+  settings,
   home,
   chat,
-  settings,
 }
