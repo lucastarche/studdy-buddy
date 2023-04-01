@@ -1,21 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:studdy_buddy/components/message.dart';
+import 'package:studdy_buddy/home/home.dart';
 
 class Chat extends StatelessWidget {
   final List messages;
+  final String chatName;
   final String user;
-  const Chat({super.key, required this.messages, required this.user});
+  final CircleAvatar chatPhoto;
+  const Chat(
+      {super.key,
+      required this.messages,
+      required this.user,
+      required this.chatName,
+      required this.chatPhoto});
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 500,
-      child: Padding(
-        padding: const EdgeInsets.all(22.0),
-        child: ListView(
-            children: messages
-                .map((e) => MessageView(message: e, chatUser: user))
-                .toList()),
-      ),
+    return Column(
+      children: [
+        ChatHeader(title: chatName),
+        // other widgets go here
+        Flexible(
+          child: Padding(
+            padding: const EdgeInsets.all(22.0),
+            child: ListView(
+              children: messages
+                  .map((e) => MessageView(message: e, chatUser: user))
+                  .toList(),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -54,9 +68,18 @@ class MessageBlob extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              message.username,
-              style: const TextStyle(color: Colors.black),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                message.chatPhoto,
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    message.username,
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                ),
+              ],
             ),
             Text(
               message.data,
@@ -65,6 +88,40 @@ class MessageBlob extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class ChatHeader extends StatelessWidget {
+  final String title;
+
+  const ChatHeader({Key? key, required this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.blue,
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back),
+        onPressed: () {
+          // handle back button press
+        },
+      ),
+      title: Text(
+        title,
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+        ),
+      ),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.more_vert),
+          onPressed: () {
+            // handle overflow menu button press
+          },
+        ),
+      ],
     );
   }
 }
