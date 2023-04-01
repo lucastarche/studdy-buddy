@@ -95,7 +95,7 @@ class SettingsPage extends StatelessWidget {
             const SizedBox(height: 8.0),
             Slider(
               min: 0,
-              max: 100,
+              max: 50,
               divisions: 10,
               label: '$maxDistance km',
               value: maxDistance,
