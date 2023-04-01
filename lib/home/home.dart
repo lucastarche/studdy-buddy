@@ -1,31 +1,21 @@
 import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:studdy_buddy/components/user_card.dart';
+import 'package:studdy_buddy/app_state.dart';
 
 import '../components/app_scaffold.dart';
 
+// ignore: must_be_immutable
 class HomePage extends StatelessWidget {
-  HomePage({
+  const HomePage({
     Key? key,
   }) : super(key: key);
 
-  List<Widget> cards = [
-    UserCard(
-      name: "Juan",
-      pfp: Image.asset("assets/600x600.png"),
-      description: "Amo el no estudiar",
-      prosArray: ["Misma universidad", "Le gusta la pizza"],
-    ),
-    UserCard(
-      name: "Pedro",
-      pfp: Image.asset("assets/600x600.png"),
-      description: "dale que se aprueba wacho",
-      prosArray: ["Vive a 3km", "Cursa algebra"],
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final state = Provider.of<AppState>(context);
+    final cards = state.cards;
     return AppScaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -38,7 +28,8 @@ class HomePage extends StatelessWidget {
                 width: 600.0,
                 child: AppinioSwiper(
                   loop: true,
-                  cardsBuilder: (context, index) => cards[index],
+                  cardsBuilder: (context, index) =>
+                      UserCard(cardBuilder: cards[index]),
                   cardsCount: cards.length,
                   swipeOptions: AppinioSwipeOptions.horizontal,
                 ),

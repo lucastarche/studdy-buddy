@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
+import 'user_card_object.dart';
 
 class UserCard extends StatefulWidget {
-  final String name; //name of the person
-  final Image pfp; //profile picture
-  final String description; //description
-  final List prosArray; //array of common attributes
-  const UserCard(
-      {super.key,
-      required this.name,
-      required this.pfp,
-      required this.description,
-      required this.prosArray});
+  final UserCardObject cardBuilder;
+  const UserCard({super.key, required this.cardBuilder});
 
   @override
   State<UserCard> createState() => _UserCardState();
@@ -35,12 +28,16 @@ class _UserCardState extends State<UserCard> {
           padding: const EdgeInsets.all(30.0),
           child: Column(
             children: [
-              ImageAndName(style: style, name: widget.name, image: widget.pfp),
+              ImageAndName(
+                  style: style,
+                  name: widget.cardBuilder.name,
+                  image: widget.cardBuilder.pfp),
               const SizedBox(
                 height: 15,
               ),
               UserInformation(
-                  description: widget.description, prosArray: widget.prosArray)
+                  description: widget.cardBuilder.description,
+                  prosArray: widget.cardBuilder.prosArray)
             ],
           ),
         ),

@@ -12,9 +12,7 @@ class AppState extends ChangeNotifier {
     backgroundImage: NetworkImage('https://via.placerholder/100x100'),
   );
   //Card Basic
-  final bigPhoto =
-      const Image(image: NetworkImage('http://via.placeholder/512x512'));
-
+  final bigPhoto = Image.asset("assets/600x600.png");
   late final List<ChatObject> chats;
   late final List<UserCardObject> cards;
   late final SettingsObject sobj;
