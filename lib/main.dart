@@ -3,8 +3,14 @@ import 'package:studdy_buddy/chat/chat_page.dart';
 import 'package:studdy_buddy/components/app_scaffold.dart';
 import 'package:studdy_buddy/home/home.dart';
 import 'package:studdy_buddy/routes.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const StuddyBuddyApp());
 }
 
