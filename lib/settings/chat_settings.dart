@@ -78,7 +78,7 @@ class SettingsPage extends StatelessWidget {
             const SizedBox(height: 16.0),
             Text(
               'Subjects',
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 8.0),
             Wrap(
@@ -111,18 +111,18 @@ class SettingsPage extends StatelessWidget {
                                 onChanged: (String? value) {
                                   // TODO: add the selected subject
                                 },
-                                items: [
+                                items: const [
                                   DropdownMenuItem<String>(
                                     value: 'Math',
-                                    child: const Text('Math'),
+                                    child: Text('Math'),
                                   ),
                                   DropdownMenuItem<String>(
                                     value: 'Science',
-                                    child: const Text('Science'),
+                                    child: Text('Science'),
                                   ),
                                   DropdownMenuItem<String>(
                                     value: 'History',
-                                    child: const Text('History'),
+                                    child: Text('History'),
                                   ),
                                 ],
                               ),
@@ -145,11 +145,11 @@ class SettingsPage extends StatelessWidget {
                           },
                         );
                       },
-                      child: const Icon(Icons.add),
                       style: ElevatedButton.styleFrom(
                         shape: const CircleBorder(),
                         padding: const EdgeInsets.all(16.0),
                       ),
+                      child: const Icon(Icons.add),
                     ),
                   ),
                 ),
