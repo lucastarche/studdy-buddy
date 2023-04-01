@@ -1,19 +1,11 @@
 import 'package:flip_card/flip_card.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
+import 'user_card_object.dart';
 
 class UserCard extends StatefulWidget {
-  final String name; //name of the person
-  final Image pfp; //profile picture
-  final String description; //description
-  final List prosArray; //array of common attributes
-
-  const UserCard(
-      {super.key,
-      required this.name,
-      required this.pfp,
-      required this.description,
-      required this.prosArray});
+  final UserCardObject cardBuilder;
+  const UserCard({super.key, required this.cardBuilder});
 
   @override
   State<UserCard> createState() => _UserCardState();
@@ -36,14 +28,14 @@ class _UserCardState extends State<UserCard> {
         children: [
           ImageAndName(
             style: style,
-            name: widget.name,
-            image: widget.pfp,
+            name: widget.cardBuilder.name,
+            image: widget.cardBuilder.pfp,
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: UserInformation(
-              description: widget.description,
-              prosArray: widget.prosArray,
+              description: widget.cardBuilder.description,
+              prosArray: widget.cardBuilder.prosArray,
             ),
           ),
         ],
@@ -66,7 +58,8 @@ class _UserCardState extends State<UserCard> {
           elevation: 10,
           color: Colors.white,
           margin: EdgeInsets.zero,
-          child: cardBack),
+          child: cardBack,
+      ),
     );
   }
 }

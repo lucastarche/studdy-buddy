@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:studdy_buddy/components/app_scaffold.dart';
+import 'package:provider/provider.dart';
+import 'package:studdy_buddy/app_state.dart';
 import 'package:studdy_buddy/components/chat.dart';
 import 'package:studdy_buddy/components/message.dart';
 
@@ -8,6 +10,8 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = Provider.of<AppState>(context);
+    final chats = state.chats;
     return AppScaffold(
       appBar: AppBar(
         title: const Text('Chats'),
@@ -17,21 +21,9 @@ class ChatPage extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         child: Wrap(
           runSpacing: 8.0,
-          children: [
-            "Nacho",
-            "Lucas",
-            "Jere",
-            "Nacho",
-            "Lucas",
-            "Nacho",
-            "Lucas",
-            "Nacho",
-            "Lucas",
-            "Nacho",
-            "Lucas",
-            "Nacho",
-            "Lucas"
-          ].map((user) => ChatOption(username: user)).toList(),
+          children: (chats.map((e) => e.chatName).toList())
+              .map((user) => ChatOption(username: user))
+              .toList(),
         ),
       ),
     );

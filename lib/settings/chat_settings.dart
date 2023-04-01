@@ -5,30 +5,14 @@ import 'package:studdy_buddy/app_state.dart';
 import '../components/app_scaffold.dart';
 
 class SettingsPage extends StatelessWidget {
-  final NetworkImage profilePicture;
-  final String username;
-  final String email;
-  final bool restrictByInstitution;
-  final List<String> subjects;
-  final double maxDistance;
-  final bool pushNotificationsEnabled;
-  final bool emailNotificationsEnabled;
-
   const SettingsPage({
     Key? key,
-    required this.profilePicture,
-    required this.username,
-    required this.email,
-    required this.subjects,
-    required this.maxDistance,
-    required this.restrictByInstitution,
-    required this.pushNotificationsEnabled,
-    required this.emailNotificationsEnabled,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<AppState>(context);
+    final settings = state.sobj;
 
     return AppScaffold(
       appBar: AppBar(
@@ -43,7 +27,7 @@ class SettingsPage extends StatelessWidget {
             Row(
               children: [
                 CircleAvatar(
-                  backgroundImage: profilePicture,
+                  backgroundImage: settings.profilePicture,
                   radius: 32.0,
                 ),
                 const SizedBox(width: 16.0),
@@ -51,10 +35,10 @@ class SettingsPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      username,
+                      settings.username,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
-                    Text(email),
+                    Text(settings.email),
                   ],
                 ),
               ],
@@ -70,7 +54,7 @@ class SettingsPage extends StatelessWidget {
               title: const Text('Restrict by Institution'),
               subtitle:
                   const Text('Only match with users from the same institution'),
-              value: restrictByInstitution,
+              value: settings.restrictByInstitution,
               onChanged: (value) {
                 // TODO: implement toggle for restrictByInstitution
               },
@@ -78,7 +62,7 @@ class SettingsPage extends StatelessWidget {
             const SizedBox(height: 16.0),
             Text(
               'Subjects',
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 8.0),
             Wrap(
@@ -86,7 +70,7 @@ class SettingsPage extends StatelessWidget {
               spacing: 8.0,
               runSpacing: 8.0,
               children: [
-                ...subjects.map((subject) {
+                ...settings.subjects.map((subject) {
                   return Chip(
                     label: Text(subject),
                     onDeleted: () {
@@ -159,8 +143,8 @@ class SettingsPage extends StatelessWidget {
               min: 0,
               max: 50,
               divisions: 10,
-              label: '$maxDistance km',
-              value: maxDistance,
+              label: '$settings.maxDistance km',
+              value: settings.maxDistance,
               onChanged: (value) {
                 // TODO: implement set maxDistance
               },
@@ -174,7 +158,7 @@ class SettingsPage extends StatelessWidget {
             const SizedBox(height: 16.0),
             SwitchListTile(
               title: const Text('Push Notifications'),
-              value: pushNotificationsEnabled,
+              value: settings.pushNotificationsEnabled,
               onChanged: (value) {
                 // TODO: implement toggle for pushNotificationsEnabled
               },
@@ -182,7 +166,7 @@ class SettingsPage extends StatelessWidget {
             const SizedBox(height: 16.0),
             SwitchListTile(
               title: const Text('Email Notifications'),
-              value: emailNotificationsEnabled,
+              value: settings.emailNotificationsEnabled,
               onChanged: (value) {
                 // TODO: implement toggle for emailNotificationsEnabled
               },

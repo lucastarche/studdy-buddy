@@ -26,24 +26,8 @@ class StuddyBuddyApp extends StatelessWidget {
         ),
         initialRoute: Routes.home.name,
         routes: {
-          Routes.home.name: (context) => HomePage(),
-          Routes.settings.name: (context) => const SettingsPage(
-                email: "ignacio@gmail.com",
-                username: "ignaciocanta",
-                profilePicture:
-                    NetworkImage("http://via.placeholder.com/64x64"),
-                subjects: [
-                  "Analisis 1",
-                  "Analisis 2",
-                  "Analisis 3",
-                  "Analisis 4",
-                  "Analisis 5",
-                ],
-                maxDistance: 4,
-                restrictByInstitution: false,
-                pushNotificationsEnabled: true,
-                emailNotificationsEnabled: true,
-              ),
+          Routes.home.name: (context) => const HomePage(),
+          Routes.settings.name: (context) => const SettingsPage(),
           Routes.chat.name: (context) => const ChatPage(),
         },
         onGenerateRoute: (settings) {
