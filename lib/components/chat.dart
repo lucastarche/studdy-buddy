@@ -29,6 +29,7 @@ class Chat extends StatelessWidget {
             ),
           ),
         ),
+        const TextInput(),
       ],
     );
   }
@@ -114,14 +115,33 @@ class ChatHeader extends StatelessWidget {
           fontSize: 20,
         ),
       ),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.more_vert),
-          onPressed: () {
-            // handle overflow menu button press
-          },
-        ),
-      ],
+    );
+  }
+}
+
+class TextInput extends StatelessWidget {
+  const TextInput({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      height: 60.0,
+      child: Row(
+        children: [
+          const Expanded(
+            child: TextField(
+              decoration: InputDecoration.collapsed(hintText: "Type a message"),
+            ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.send),
+            onPressed: () {
+              // Handle sending message
+            },
+          ),
+        ],
+      ),
     );
   }
 }
