@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:studdy_buddy/components/app_scaffold.dart';
+import 'package:studdy_buddy/components/chat.dart';
+import 'package:studdy_buddy/components/message.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -48,7 +50,19 @@ class ChatOption extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.push(context, MaterialPageRoute(builder: ))
+        final image =
+            CircleAvatar(backgroundImage: AssetImage('assets/64x64.png'));
+
+        Navigator.pushNamed(context, "chatting-with",
+            arguments: <String, dynamic>{
+              "chatName": username,
+              "chatPhoto": image,
+              "user": "Lucas",
+              "messages": [
+                Message(data: "Hola", username: "Lucas", chatPhoto: image),
+                Message(data: "Hola", username: username, chatPhoto: image),
+              ]
+            });
       },
       child: Container(
         padding: const EdgeInsets.all(16.0),
@@ -66,7 +80,7 @@ class ChatOption extends StatelessWidget {
         child: Row(
           children: [
             const CircleAvatar(
-              backgroundImage: NetworkImage("http://via.placeholder.com/64x64"),
+              backgroundImage: AssetImage("assets/64x64.png"),
               radius: 24.0,
             ),
             const SizedBox(
