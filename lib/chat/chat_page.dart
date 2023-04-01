@@ -48,8 +48,7 @@ class ChatOption extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Handle chat selection
-        print(username);
+        // Navigator.push(context, MaterialPageRoute(builder: ))
       },
       child: Container(
         padding: const EdgeInsets.all(16.0),

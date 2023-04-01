@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:studdy_buddy/app_state.dart';
 
 import '../components/app_scaffold.dart';
 
@@ -26,6 +28,8 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = Provider.of<AppState>(context);
+
     return AppScaffold(
       appBar: AppBar(
         title: const Text('Settings'),
@@ -74,20 +78,82 @@ class SettingsPage extends StatelessWidget {
             const SizedBox(height: 16.0),
             Text(
               'Subjects',
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context).textTheme.headline6,
             ),
             const SizedBox(height: 8.0),
             Wrap(
               spacing: 8.0,
               runSpacing: 8.0,
-              children: subjects.map((subject) {
-                return Chip(
-                  label: Text(subject),
-                  onDeleted: () {
-                    // TODO: implement remove subject
-                  },
-                );
-              }).toList(),
+              children: [
+                ...subjects.map((subject) {
+                  return Chip(
+                    label: Text(subject),
+                    onDeleted: () {
+                      // TODO: implement remove subject
+                    },
+                  );
+                }),
+                SizedBox(
+                  width: 40.0,
+                  height: 40.0,
+                  child: SizedBox(
+                    height: 48.0,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text('Add a subject'),
+                              content: DropdownButton<String>(
+                                isExpanded: true,
+                                value: null,
+                                onChanged: (String? value) {
+                                  // TODO: add the selected subject
+                                },
+                                items: [
+                                  DropdownMenuItem<String>(
+                                    value: 'Math',
+                                    child: const Text('Math'),
+                                  ),
+                                  DropdownMenuItem<String>(
+                                    value: 'Science',
+                                    child: const Text('Science'),
+                                  ),
+                                  DropdownMenuItem<String>(
+                                    value: 'History',
+                                    child: const Text('History'),
+                                  ),
+                                ],
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text('Cancel'),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // TODO: add the selected subject
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text('Add'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                      child: const Icon(Icons.add),
+                      style: ElevatedButton.styleFrom(
+                        shape: const CircleBorder(),
+                        padding: const EdgeInsets.all(16.0),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 16.0),
             Text(
