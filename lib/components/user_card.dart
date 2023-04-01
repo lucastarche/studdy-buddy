@@ -24,26 +24,26 @@ class _UserCardState extends State<UserCard> {
       color: Colors.white,
       fontSize: 30,
     );
+
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       elevation: 10,
-      margin: const EdgeInsets.all(30),
       color: Colors.white,
-      child: SizedBox(
-        width: 500,
-        child: Padding(
-          padding: const EdgeInsets.all(30.0),
-          child: Column(
-            children: [
-              ImageAndName(style: style, name: widget.name, image: widget.pfp),
-              const SizedBox(
-                height: 15,
-              ),
-              UserInformation(
-                  description: widget.description, prosArray: widget.prosArray)
-            ],
+      margin: EdgeInsets.zero,
+      child: Column(
+        children: [
+          ImageAndName(
+            style: style,
+            name: widget.name,
+            image: widget.pfp,
           ),
-        ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: UserInformation(
+              description: widget.description,
+              prosArray: widget.prosArray,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -53,25 +53,33 @@ class ImageAndName extends StatelessWidget {
   final String name;
   final Image image;
   final TextStyle style;
-  const ImageAndName(
-      {super.key,
-      required this.name,
-      required this.image,
-      required this.style});
+  const ImageAndName({
+    super.key,
+    required this.name,
+    required this.image,
+    required this.style,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Positioned(child: image),
         Positioned(
-          bottom: 0,
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Text(
-              name,
-              style: style,
-              softWrap: true,
-            ),
+          child: image,
+        ),
+        Positioned(
+          bottom: 20,
+          left: 20,
+          child: Text(
+            name,
+            style: style.copyWith(shadows: [
+              const Shadow(
+                blurRadius: 4.0,
+                color: Colors.black,
+                offset: Offset(2, 2),
+              ),
+            ]),
+            softWrap: true,
           ),
         ),
       ],
@@ -100,18 +108,20 @@ class UserInformation extends StatelessWidget {
           ),
         ),
         const Flexible(
-            fit: FlexFit.tight,
-            flex: 1,
-            child: SizedBox(
-              width: 1,
-            )),
+          fit: FlexFit.tight,
+          flex: 1,
+          child: SizedBox(
+            width: 1,
+          ),
+        ),
         Flexible(
-            fit: FlexFit.tight,
-            flex: 5,
-            child: Wrap(
-              runSpacing: 10,
-              children: prosArray.map((e) => Tick(label: e)).toList(),
-            )),
+          fit: FlexFit.tight,
+          flex: 5,
+          child: Wrap(
+            runSpacing: 10,
+            children: prosArray.map((e) => Tick(label: e)).toList(),
+          ),
+        ),
       ],
     );
   }

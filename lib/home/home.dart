@@ -12,13 +12,13 @@ class HomePage extends StatelessWidget {
   List<Widget> cards = [
     UserCard(
       name: "Juan",
-      pfp: Image.asset("assets/600x600.png"),
+      pfp: Image.asset("assets/512x512.png"),
       description: "Amo el no estudiar",
       prosArray: ["Misma universidad", "Le gusta la pizza"],
     ),
     UserCard(
       name: "Pedro",
-      pfp: Image.asset("assets/600x600.png"),
+      pfp: Image.asset("assets/512x512.png"),
       description: "dale que se aprueba wacho",
       prosArray: ["Vive a 3km", "Cursa algebra"],
     ),
@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
             children: [
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.9,
-                width: 600.0,
+                width: 512.0,
                 child: AppinioSwiper(
                   loop: true,
                   cardsBuilder: (context, index) => cards[index],
