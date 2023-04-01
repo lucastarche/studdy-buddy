@@ -22,7 +22,7 @@ class StuddyBuddyApp extends StatelessWidget {
       ),
       initialRoute: Routes.home.name,
       routes: {
-        Routes.home.name: (context) => const HomePage(),
+        Routes.home.name: (context) => HomePage(),
         Routes.settings.name: (context) => const SettingsPage(
               email: "ignacio@gmail.com",
               username: "ignaciocanta",

@@ -1,36 +1,51 @@
+import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:studdy_buddy/components/app_scaffold.dart';
+import 'package:studdy_buddy/components/user_card.dart';
 
-import '../components/user_card.dart';
+import '../components/app_scaffold.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({
+    Key? key,
+  }) : super(key: key);
+
+  List<Widget> cards = [
+    UserCard(
+      name: "Juan",
+      pfp: Image.asset("assets/600x600.png"),
+      description: "Amo el no estudiar",
+      prosArray: ["Misma universidad", "Le gusta la pizza"],
+    ),
+    UserCard(
+      name: "Pedro",
+      pfp: Image.asset("assets/600x600.png"),
+      description: "dale que se aprueba wacho",
+      prosArray: ["Vive a 3km", "Cursa algebra"],
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Column(
-              children: [
-                UserCard(
-                  name: "Charles Miguel Soto, 20",
-                  pfp: Image.network('http://via.placeholder.com/500x600'),
-                  description:
-                      '''Soy un estudiante universitario de ingeniería informática apasionado por la tecnología y su capacidad para transformar el mundo. Actualmente, estoy en mi último año de carrera y espero graduarme próximamente.''',
-                  prosArray: const [
-                    "misma universidad",
-                    "no misma universidad",
-                    "no se que poner",
-                    "se que poner"
-                  ],
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.9,
+                width: 600.0,
+                child: AppinioSwiper(
+                  loop: true,
+                  cardsBuilder: (context, index) => cards[index],
+                  cardsCount: cards.length,
+                  swipeOptions: AppinioSwipeOptions.horizontal,
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

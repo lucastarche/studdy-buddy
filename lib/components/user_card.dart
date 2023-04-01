@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
-class UserCard extends StatelessWidget {
+class UserCard extends StatefulWidget {
   final String name; //name of the person
   final Image pfp; //profile picture
   final String description; //description
@@ -14,6 +12,11 @@ class UserCard extends StatelessWidget {
       required this.description,
       required this.prosArray});
 
+  @override
+  State<UserCard> createState() => _UserCardState();
+}
+
+class _UserCardState extends State<UserCard> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -32,11 +35,12 @@ class UserCard extends StatelessWidget {
           padding: const EdgeInsets.all(30.0),
           child: Column(
             children: [
-              ImageAndName(style: style, name: name, image: pfp),
+              ImageAndName(style: style, name: widget.name, image: widget.pfp),
               const SizedBox(
                 height: 15,
               ),
-              UserInformation(description: description, prosArray: prosArray)
+              UserInformation(
+                  description: widget.description, prosArray: widget.prosArray)
             ],
           ),
         ),
