@@ -3,6 +3,7 @@ import 'package:studdy_buddy/chat/chat_page.dart';
 import 'package:studdy_buddy/components/app_scaffold.dart';
 import 'package:studdy_buddy/home/home.dart';
 import 'package:studdy_buddy/routes.dart';
+import 'package:studdy_buddy/settings/chat_settings.dart';
 
 void main() {
   runApp(const StuddyBuddyApp());
@@ -22,7 +23,11 @@ class StuddyBuddyApp extends StatelessWidget {
       initialRoute: Routes.home.name,
       routes: {
         Routes.home.name: (context) => const HomePage(),
-        Routes.settings.name: (context) => const AppScaffold(),
+        Routes.settings.name: (context) => const SettingsPage(
+              email: "ignacio@gmail.com",
+              username: "ignaciocanta",
+              profilePicture: NetworkImage("http://via.placeholder.com/64x64"),
+            ),
         Routes.chat.name: (context) => const ChatPage(),
       },
     );

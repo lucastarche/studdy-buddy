@@ -7,7 +7,11 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
+      appBar: AppBar(
+        title: Text('Chats'),
+      ),
       body: SingleChildScrollView(
+        padding: EdgeInsets.all(16.0),
         physics: BouncingScrollPhysics(),
         child: Wrap(
           children: [
