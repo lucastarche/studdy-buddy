@@ -8,12 +8,13 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppScaffold(
       appBar: AppBar(
-        title: Text('Chats'),
+        title: const Text('Chats'),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
-        physics: BouncingScrollPhysics(),
+        padding: const EdgeInsets.all(16.0),
+        physics: const BouncingScrollPhysics(),
         child: Wrap(
+          runSpacing: 8.0,
           children: [
             "Nacho",
             "Lucas",
@@ -29,7 +30,6 @@ class ChatPage extends StatelessWidget {
             "Nacho",
             "Lucas"
           ].map((user) => ChatOption(username: user)).toList(),
-          runSpacing: 8.0,
         ),
       ),
     );
@@ -40,28 +40,55 @@ class ChatOption extends StatelessWidget {
   final String username;
 
   const ChatOption({
-    super.key,
+    Key? key,
     required this.username,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(8.0),
-      child: Row(
-        children: [
-          CircleAvatar(
-            backgroundImage: NetworkImage("http://via.placeholder.com/64x64"),
-            radius: 32.0,
-          ),
-          SizedBox(
-            width: 95.0,
-          ),
-          Text(username),
-        ],
+    return GestureDetector(
+      onTap: () {
+        // Handle chat selection
+        print(username);
+      },
+      child: Container(
+        padding: const EdgeInsets.all(16.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.3),
+              blurRadius: 3,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            const CircleAvatar(
+              backgroundImage: NetworkImage("http://via.placeholder.com/64x64"),
+              radius: 24.0,
+            ),
+            const SizedBox(
+              width: 16.0,
+            ),
+            Expanded(
+              child: Text(
+                username,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                ),
+              ),
+            ),
+            const Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.grey,
+            ),
+          ],
+        ),
       ),
-      color: Colors.greenAccent,
-      alignment: Alignment.centerLeft,
     );
   }
 }
