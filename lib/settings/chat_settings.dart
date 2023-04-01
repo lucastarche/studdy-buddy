@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../components/app_scaffold.dart';
+
 class SettingsPage extends StatelessWidget {
   final NetworkImage profilePicture;
   final String username;
@@ -24,7 +26,7 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AppScaffold(
       appBar: AppBar(
         title: const Text('Settings'),
       ),
