@@ -66,6 +66,7 @@ class SettingsPage extends StatelessWidget {
             ),
             const SizedBox(height: 8.0),
             Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
               spacing: 8.0,
               runSpacing: 8.0,
               children: [
@@ -77,64 +78,57 @@ class SettingsPage extends StatelessWidget {
                     },
                   );
                 }),
-                SizedBox(
-                  width: 40.0,
-                  height: 40.0,
-                  child: SizedBox(
-                    height: 48.0,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: const Text('Add a subject'),
-                              content: DropdownButton<String>(
-                                isExpanded: true,
-                                value: null,
-                                onChanged: (String? value) {
-                                  // TODO: add the selected subject
-                                },
-                                items: const [
-                                  DropdownMenuItem<String>(
-                                    value: 'Math',
-                                    child: Text('Math'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: 'Science',
-                                    child: Text('Science'),
-                                  ),
-                                  DropdownMenuItem<String>(
-                                    value: 'History',
-                                    child: Text('History'),
-                                  ),
-                                ],
+                ElevatedButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Add a subject'),
+                          content: DropdownButton<String>(
+                            isExpanded: true,
+                            value: null,
+                            onChanged: (String? value) {
+                              // TODO: add the selected subject
+                            },
+                            items: [
+                              DropdownMenuItem<String>(
+                                value: 'Math',
+                                child: const Text('Math'),
                               ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text('Cancel'),
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    // TODO: add the selected subject
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text('Add'),
-                                ),
-                              ],
-                            );
-                          },
+                              DropdownMenuItem<String>(
+                                value: 'Science',
+                                child: const Text('Science'),
+                              ),
+                              DropdownMenuItem<String>(
+                                value: 'History',
+                                child: const Text('History'),
+                              ),
+                            ],
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text('Cancel'),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                // TODO: add the selected subject
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text('Add'),
+                            ),
+                          ],
                         );
                       },
-                      style: ElevatedButton.styleFrom(
-                        shape: const CircleBorder(),
-                        padding: const EdgeInsets.all(16.0),
-                      ),
-                      child: const Icon(Icons.add),
-                    ),
+                    );
+                  },
+                  child: const Icon(Icons.add),
+                  style: ElevatedButton.styleFrom(
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(16.0),
                   ),
                 ),
               ],

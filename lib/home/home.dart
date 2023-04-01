@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
             children: [
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.9,
-                width: 600.0,
+                width: 512.0,
                 child: AppinioSwiper(
                   loop: true,
                   cardsBuilder: (context, index) =>

@@ -7,30 +7,41 @@ class Chat extends StatelessWidget {
   final String chatName;
   final String user;
   final CircleAvatar chatPhoto;
-  const Chat(
-      {super.key,
-      required this.messages,
-      required this.user,
-      required this.chatName,
-      required this.chatPhoto});
+
+  const Chat({
+    super.key,
+    required this.messages,
+    required this.user,
+    required this.chatName,
+    required this.chatPhoto,
+  });
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ChatHeader(title: chatName),
-        // other widgets go here
-        Flexible(
-          child: Padding(
-            padding: const EdgeInsets.all(22.0),
-            child: ListView(
-              children: messages
-                  .map((e) => MessageView(message: e, chatUser: user))
-                  .toList(),
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: Text(
+          chatName,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
           ),
         ),
-        const TextInput(),
-      ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(22.0),
+        child: ListView(
+          children: messages
+              .map((e) => MessageView(message: e, chatUser: user))
+              .toList(),
+        ),
+      ),
+      bottomNavigationBar: const TextInput(),
     );
   }
 }
@@ -39,6 +50,7 @@ class MessageView extends StatelessWidget {
   final Message message; //the message itself
   final String chatUser; //the user that is viewing the chat
   const MessageView({super.key, required this.message, required this.chatUser});
+
   @override
   Widget build(BuildContext context) {
     var alignment = MainAxisAlignment.start;
@@ -87,32 +99,6 @@ class MessageBlob extends StatelessWidget {
               style: const TextStyle(color: Colors.white),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class ChatHeader extends StatelessWidget {
-  final String title;
-
-  const ChatHeader({Key? key, required this.title}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.blue,
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back),
-        onPressed: () {
-          // handle back button press
-        },
-      ),
-      title: Text(
-        title,
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 20,
         ),
       ),
     );
