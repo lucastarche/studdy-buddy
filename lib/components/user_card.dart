@@ -1,3 +1,5 @@
+import 'package:flip_card/flip_card.dart';
+import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 
 class UserCard extends StatefulWidget {
@@ -5,6 +7,7 @@ class UserCard extends StatefulWidget {
   final Image pfp; //profile picture
   final String description; //description
   final List prosArray; //array of common attributes
+
   const UserCard(
       {super.key,
       required this.name,
@@ -17,6 +20,8 @@ class UserCard extends StatefulWidget {
 }
 
 class _UserCardState extends State<UserCard> {
+  final FlipCardController _controller = FlipCardController();
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -25,10 +30,8 @@ class _UserCardState extends State<UserCard> {
       fontSize: 30,
     );
 
-    return Card(
-      elevation: 10,
-      color: Colors.white,
-      margin: EdgeInsets.zero,
+    final cardFront = GestureDetector(
+      onDoubleTap: () => _controller.toggleCard(),
       child: Column(
         children: [
           ImageAndName(
@@ -45,6 +48,25 @@ class _UserCardState extends State<UserCard> {
           ),
         ],
       ),
+    );
+
+    final cardBack = GestureDetector(
+      onDoubleTap: () => _controller.toggleCard(),
+      child: const Center(child: Text("Back")),
+    );
+
+    return FlipCard(
+      front: Card(
+        elevation: 10,
+        color: Colors.white,
+        margin: EdgeInsets.zero,
+        child: cardFront,
+      ),
+      back: Card(
+          elevation: 10,
+          color: Colors.white,
+          margin: EdgeInsets.zero,
+          child: cardBack),
     );
   }
 }
