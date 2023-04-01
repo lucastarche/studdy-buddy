@@ -79,4 +79,9 @@ class AppState extends ChangeNotifier {
       profilePicture: pfpSmall,
     );
   }
+
+  void addMessageToChat(int chatInd, Message newMessage) {
+    chats[chatInd].messages.add(newMessage);
+    notifyListeners();
+  }
 }

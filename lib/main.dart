@@ -33,11 +33,11 @@ class StuddyBuddyApp extends StatelessWidget {
         },
         onGenerateRoute: (settings) {
           if (settings.name == "chatting-with") {
-            final args = settings.arguments as ChatObject;
+            final args = settings.arguments as int;
             return MaterialPageRoute(
               builder: (context) => Scaffold(
                 body: Chat(
-                  chatObject: args,
+                  chatInd: args,
                 ),
               ),
             );

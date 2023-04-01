@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:studdy_buddy/components/chat_object.dart';
 import 'package:studdy_buddy/components/message.dart';
-import 'package:studdy_buddy/home/home.dart';
+import 'package:provider/provider.dart';
+import 'package:studdy_buddy/app_state.dart';
 
 class Chat extends StatelessWidget {
-  final ChatObject chatObject;
+  final int chatInd;
 
   const Chat({
     super.key,
-    required this.chatObject,
+    required this.chatInd,
   });
 
   @override
   Widget build(BuildContext context) {
+    final state = Provider.of<AppState>(context);
+    var chatObject = state.chats[chatInd];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
@@ -36,7 +39,9 @@ class Chat extends StatelessWidget {
               .toList(),
         ),
       ),
-      bottomNavigationBar: const TextInput(),
+      bottomNavigationBar: TextInput(
+        chatInd: chatInd,
+      ),
     );
   }
 }
@@ -101,24 +106,37 @@ class MessageBlob extends StatelessWidget {
 }
 
 class TextInput extends StatelessWidget {
-  const TextInput({super.key});
+  final int chatInd;
+  final textEditingController = TextEditingController();
+
+  TextInput({super.key, required this.chatInd});
 
   @override
   Widget build(BuildContext context) {
+    final state = Provider.of<AppState>(context);
+    var chatObject = state.chats[chatInd];
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       height: 60.0,
       child: Row(
         children: [
-          const Expanded(
+          Expanded(
             child: TextField(
-              decoration: InputDecoration.collapsed(hintText: "Type a message"),
+              controller: textEditingController,
+              decoration:
+                  const InputDecoration.collapsed(hintText: "Type a message"),
             ),
           ),
           IconButton(
             icon: const Icon(Icons.send),
             onPressed: () {
               // Handle sending message
+              //create the message
+              var newMessage = Message(
+                  data: textEditingController.text,
+                  username: chatObject.user,
+                  chatPhoto: chatObject.chatPhoto);
+              state.addMessageToChat(chatInd, newMessage);
             },
           ),
         ],

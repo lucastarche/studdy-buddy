@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:studdy_buddy/components/app_scaffold.dart';
 import 'package:provider/provider.dart';
 import 'package:studdy_buddy/app_state.dart';
-import 'package:studdy_buddy/components/chat.dart';
-import 'package:studdy_buddy/components/message.dart';
-
-import '../components/chat_object.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -45,7 +41,7 @@ class ChatOption extends StatelessWidget {
     final chat = state.chats[chatInd];
     return GestureDetector(
       onTap: () =>
-          Navigator.pushNamed(context, "chatting-with", arguments: chat),
+          Navigator.pushNamed(context, "chatting-with", arguments: chatInd),
       child: Container(
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
