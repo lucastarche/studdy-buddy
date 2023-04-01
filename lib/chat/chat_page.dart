@@ -5,6 +5,8 @@ import 'package:studdy_buddy/app_state.dart';
 import 'package:studdy_buddy/components/chat.dart';
 import 'package:studdy_buddy/components/message.dart';
 
+import '../components/chat_object.dart';
+
 class ChatPage extends StatelessWidget {
   const ChatPage({Key? key}) : super(key: key);
 
@@ -21,9 +23,8 @@ class ChatPage extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         child: Wrap(
           runSpacing: 8.0,
-          children: (chats.map((e) => e.chatName).toList())
-              .map((user) => ChatOption(username: user))
-              .toList(),
+          children: List.generate(
+              chats.length, (index) => ChatOption(chatInd: index)),
         ),
       ),
     );
@@ -31,31 +32,20 @@ class ChatPage extends StatelessWidget {
 }
 
 class ChatOption extends StatelessWidget {
-  final String username;
+  final int chatInd;
 
   const ChatOption({
     Key? key,
-    required this.username,
+    required this.chatInd,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final state = Provider.of<AppState>(context);
+    final chat = state.chats[chatInd];
     return GestureDetector(
-      onTap: () {
-        final image =
-            CircleAvatar(backgroundImage: AssetImage('assets/64x64.png'));
-
-        Navigator.pushNamed(context, "chatting-with",
-            arguments: <String, dynamic>{
-              "chatName": username,
-              "chatPhoto": image,
-              "user": "Lucas",
-              "messages": [
-                Message(data: "Hola", username: "Lucas", chatPhoto: image),
-                Message(data: "Hola", username: username, chatPhoto: image),
-              ]
-            });
-      },
+      onTap: () =>
+          Navigator.pushNamed(context, "chatting-with", arguments: chat),
       child: Container(
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
@@ -80,7 +70,7 @@ class ChatOption extends StatelessWidget {
             ),
             Expanded(
               child: Text(
-                username,
+                chat.chatName,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16.0,

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:studdy_buddy/app_state.dart';
 import 'package:studdy_buddy/chat/chat_page.dart';
 import 'package:studdy_buddy/components/chat.dart';
+import 'package:studdy_buddy/components/chat_object.dart';
 import 'package:studdy_buddy/home/home.dart';
 import 'package:studdy_buddy/routes.dart';
 import 'package:studdy_buddy/settings/chat_settings.dart';
@@ -32,14 +33,11 @@ class StuddyBuddyApp extends StatelessWidget {
         },
         onGenerateRoute: (settings) {
           if (settings.name == "chatting-with") {
-            final args = settings.arguments as Map<String, dynamic>;
+            final args = settings.arguments as ChatObject;
             return MaterialPageRoute(
               builder: (context) => Scaffold(
                 body: Chat(
-                  chatName: args["chatName"],
-                  chatPhoto: args["chatPhoto"],
-                  messages: args["messages"],
-                  user: args["user"],
+                  chatObject: args,
                 ),
               ),
             );

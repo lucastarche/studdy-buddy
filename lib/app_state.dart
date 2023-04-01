@@ -27,8 +27,30 @@ class AppState extends ChangeNotifier {
             username: "carlitos",
             chatPhoto: dummyPhoto,
           ),
+          Message(
+            data: "hola carlitos",
+            username: "elsantodel90",
+            chatPhoto: dummyPhoto,
+          ),
         ],
         chatName: 'chat con agustin',
+        user: 'carlitos',
+        chatPhoto: dummyPhoto,
+      ),
+      ChatObject(
+        messages: [
+          Message(
+            data: "hola",
+            username: "carlitos",
+            chatPhoto: dummyPhoto,
+          ),
+          Message(
+            data: "hola carlitos",
+            username: "elsantodel90",
+            chatPhoto: dummyPhoto,
+          ),
+        ],
+        chatName: 'chat con agustin 2',
         user: 'carlitos',
         chatPhoto: dummyPhoto,
       ),

@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:studdy_buddy/components/chat_object.dart';
 import 'package:studdy_buddy/components/message.dart';
 import 'package:studdy_buddy/home/home.dart';
 
 class Chat extends StatelessWidget {
-  final List messages;
-  final String chatName;
-  final String user;
-  final CircleAvatar chatPhoto;
+  final ChatObject chatObject;
 
   const Chat({
     super.key,
-    required this.messages,
-    required this.user,
-    required this.chatName,
-    required this.chatPhoto,
+    required this.chatObject,
   });
 
   @override
@@ -26,7 +21,7 @@ class Chat extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          chatName,
+          chatObject.chatName,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
@@ -36,8 +31,8 @@ class Chat extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(22.0),
         child: ListView(
-          children: messages
-              .map((e) => MessageView(message: e, chatUser: user))
+          children: chatObject.messages
+              .map((e) => MessageView(message: e, chatUser: chatObject.user))
               .toList(),
         ),
       ),
