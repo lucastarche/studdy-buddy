@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 
-import 'firebase_options.dart';
+import 'components/chat_object.dart';
+import 'components/message.dart';
+import 'components/settings_object.dart';
+import 'components/user_card_object.dart';
 
 class AppState extends ChangeNotifier {
   bool _loggedIn = false;
@@ -21,22 +21,39 @@ class AppState extends ChangeNotifier {
       print(_loggedIn);
       notifyListeners();
     });
-    
+  }
+
   //general
-  final pfpSmall = const NetworkImage('https://via.placerholder/100x100');
+  var pfpSmall = const NetworkImage('http://via.placerholder/100x100',
+      headers: {'X-Requested-With': 'XMLHttpRequest'});
   //Chat Basic
-  final dummyPhoto = const CircleAvatar(
-    backgroundImage: NetworkImage('https://via.placerholder/100x100'),
+  // ignore: prefer_const_constructors
+  final dummyPhoto = CircleAvatar(
+    backgroundImage: const NetworkImage('http://via.placerholder/100x100',
+        headers: {'X-Requested-With': 'XMLHttpRequest'}),
   );
   //Card Basic
   final bigPhoto = Image.asset("assets/600x600.png");
+  //user information and preferences variables
+  var email = 'charlescharles@gmail.com';
+  var username = 'carlitos';
+  var emailNotificationsEnabled = false;
+  var pushNotificationsEnabled = false;
+  var restrictByInstitution = false;
+  var subjects = [
+    'analisis 1',
+    'matematica 200',
+    'introduccion al pensamiento cientifico'
+  ];
+  var maxDistance = 4.0;
+  ////////////
   late final List<ChatObject> chats;
   late final List<UserCardObject> cards;
-  late final SettingsObject sobj;
+  var sobj;
 
   AppState() {
     init();
-    
+
     //Chat
     chats = [
       ChatObject(
@@ -84,17 +101,13 @@ class AppState extends ChangeNotifier {
     ];
     //Settings
     sobj = SettingsObject(
-      email: 'charlescharles@gmail.com',
-      username: 'carlitos',
-      emailNotificationsEnabled: false,
-      pushNotificationsEnabled: false,
-      restrictByInstitution: false,
-      subjects: [
-        'analisis 1',
-        'matematica 200',
-        'introduccion al pensamiento cientifico'
-      ],
-      maxDistance: 4,
+      email: email,
+      username: username,
+      emailNotificationsEnabled: emailNotificationsEnabled,
+      pushNotificationsEnabled: pushNotificationsEnabled,
+      restrictByInstitution: restrictByInstitution,
+      subjects: subjects,
+      maxDistance: maxDistance,
       profilePicture: pfpSmall,
     );
   }
@@ -102,5 +115,28 @@ class AppState extends ChangeNotifier {
   void addMessageToChat(int chatInd, Message newMessage) {
     chats[chatInd].messages.add(newMessage);
     notifyListeners();
+  }
+
+  void updateSettingsObject() {
+    sobj = SettingsObject(
+      email: email,
+      username: username,
+      emailNotificationsEnabled: emailNotificationsEnabled,
+      pushNotificationsEnabled: pushNotificationsEnabled,
+      restrictByInstitution: restrictByInstitution,
+      subjects: subjects,
+      maxDistance: maxDistance,
+      profilePicture: pfpSmall,
+    );
+    notifyListeners();
+  }
+
+  void updateUserInformation(BuildContext context, User user) {
+    username = user.displayName.toString();
+    email = user.email.toString();
+    pfpSmall = NetworkImage(
+        'https://cors-anywhere.herokuapp.com/${user.photoURL}',
+        headers: {'X-Requested-With': 'XMLHttpRequest'});
+    updateSettingsObject();
   }
 }
