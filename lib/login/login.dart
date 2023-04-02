@@ -18,41 +18,62 @@ class LoginPage extends StatelessWidget {
     final loginTextStyle = theme.textTheme.titleLarge;
 
     return AuthStateListener<OAuthController>(
-      listener: (oldState, state, controller) {
-        if (state is SignedIn || state is UserCreated) {
-          final user = FirebaseAuth.instance.currentUser;
-          if (user != null) {
-            Navigator.pushReplacementNamed(context, Routes.home.name);
-            final state = Provider.of<AppState>(context, listen: false);
-            state.updateUserInformation(context, user);
+        listener: (oldState, state, controller) {
+          if (state is SignedIn || state is UserCreated) {
+            final user = FirebaseAuth.instance.currentUser;
+            if (user != null) {
+              Navigator.pushReplacementNamed(context, Routes.home.name);
+              final state = Provider.of<AppState>(context, listen: false);
+              state.updateUserInformation(context, user);
+            }
           }
-        }
-        return null;
-      },
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          return null;
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text(
-              "Bienvenido a Studdy Buddy!",
-              style: headingStyle,
-            ),
-            const SizedBox(height: 32),
-            Text(
-              "Inicia sesión para continuar",
-              style: loginTextStyle,
-            ),
-            const SizedBox(height: 40),
             SizedBox(
-              width: 250,
-              child: OAuthProviderButton(
-                key: const Key('oauth-button'),
-                provider: GoogleProvider(clientId: googleClientID),
+              width: 1,
+              height: 1,
+            ),
+            SizedBox(
+              width: 450,
+              height: 450,
+              child: Card(
+                elevation: 30,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Bienvenido a Studdy Buddy!",
+                        style: headingStyle,
+                      ),
+                      SizedBox(height: 32),
+                      Text(
+                        "Inicia sesión para continuar",
+                        style: loginTextStyle,
+                      ),
+                      SizedBox(height: 40),
+                      SizedBox(
+                        width: 250,
+                        child: OAuthProviderButton(
+                          key: Key('oauth-button'),
+                          provider: GoogleProvider(
+                            clientId: googleClientID,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
+            SizedBox(
+              width: 1,
+              height: 1,
+            ),
           ],
-        ),
-      ),
-    );
+        ));
   }
 }
