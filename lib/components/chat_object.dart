@@ -5,9 +5,13 @@ class ChatObject {
   final String chatName;
   final String user;
   final CircleAvatar chatPhoto;
-  const ChatObject(
-      {required this.messages,
-      required this.chatName,
-      required this.user,
-      required this.chatPhoto});
+  final CircleAvatar userPhoto;
+
+  const ChatObject({
+    required this.messages,
+    required this.chatName,
+    required this.user,
+    required this.chatPhoto,
+    required this.userPhoto,
+  });
 }

@@ -135,7 +135,7 @@ class TextInput extends StatelessWidget {
               var newMessage = Message(
                   data: textEditingController.text,
                   username: chatObject.user,
-                  chatPhoto: chatObject.chatPhoto);
+                  chatPhoto: chatObject.userPhoto);
               state.addMessageToChat(chatInd, newMessage);
             },
           ),

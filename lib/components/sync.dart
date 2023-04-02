@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:studdy_buddy/app_state.dart';
 
 class SyncDialog {
   final BuildContext context;
+  final int index;
   final String user;
+  final ImageProvider userImage;
 
-  SyncDialog({required this.context, required this.user});
+  SyncDialog(
+      {required this.context,
+      required this.index,
+      required this.user,
+      required this.userImage});
 
   Future show() {
     return showDialog(
@@ -18,7 +26,7 @@ class SyncDialog {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16.0),
             image: DecorationImage(
-              image: AssetImage('assets/carlos.jpg'),
+              image: userImage,
               fit: BoxFit.cover,
             ),
           ),
@@ -28,9 +36,7 @@ class SyncDialog {
                 top: 20,
                 right: 20,
                 child: IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
+                  onPressed: _onDismiss,
                   icon: Icon(
                     Icons.close,
                     color: Colors.white,
@@ -69,9 +75,7 @@ class SyncDialog {
                 left: 20,
                 right: 20,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
+                  onPressed: _onDismiss,
                   child: Text(
                     "OK",
                     style: TextStyle(
@@ -101,5 +105,12 @@ class SyncDialog {
         ),
       ),
     );
+  }
+
+  void _onDismiss() {
+    Navigator.of(context).pop();
+
+    final state = Provider.of<AppState>(context, listen: false);
+    state.removeCard(index);
   }
 }
