@@ -33,7 +33,7 @@ class AppState extends ChangeNotifier {
         headers: {'X-Requested-With': 'XMLHttpRequest'}),
   );
   //Card Basic
-  final bigPhoto = Image.asset("assets/600x600.png");
+  final bigPhoto = Image.asset("assets/carlos.jpeg");
   //user information and preferences variables
   var email = 'charlescharles@gmail.com';
   var username = 'carlitos';
@@ -96,8 +96,14 @@ class AppState extends ChangeNotifier {
       UserCardObject(
           name: 'carlos',
           pfp: bigPhoto,
-          description: 'hola soy carlos',
-          prosArray: ['soy crack', 'soy muy crack']),
+          description:
+              'Hola mi nombre es Carlos y soy un apasionado de las ciencias de la computacion, estoy cursando en FCEN y espero graduarme pronto. Con mi equipo fuimos ICPC LATAM Champions',
+          prosArray: [
+            'Va a la misma universidad que vos',
+            'Vive a 5km',
+            'Cursa Analisis',
+            'Le gusta el Ajedrez'
+          ]),
     ];
     //Settings
     sobj = SettingsObject(
