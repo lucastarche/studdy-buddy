@@ -66,6 +66,9 @@ class SettingsPage extends StatelessWidget {
                 height: 500,
               ),
             ),
+            DaySlotPicker(
+              onSelection: state.toggleSlot,
+            ),
             const SizedBox(height: 16.0),
             Text(
               'Subjects',
@@ -182,6 +185,112 @@ class SettingsPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class DaySlotPicker extends StatefulWidget {
+  final void Function(String day, int slot) onSelection;
+
+  const DaySlotPicker({Key? key, required this.onSelection}) : super(key: key);
+
+  @override
+  _DaySlotPickerState createState() => _DaySlotPickerState();
+}
+
+class _DaySlotPickerState extends State<DaySlotPicker> {
+  String? _selectedDay;
+  int? _selectedSlot;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ElevatedButton(
+        onPressed: () => _showPicker(context),
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        ),
+        child: Text(
+          _selectedDay != null && _selectedSlot != null
+              ? '$_selectedDay - Slot $_selectedSlot'
+              : 'Tap to add a free slot',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showPicker(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Select day and slot'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              DropdownButtonFormField<String>(
+                value: _selectedDay,
+                items: [
+                  DropdownMenuItem(child: Text('Lunes'), value: 'Lunes'),
+                  DropdownMenuItem(child: Text('Martes'), value: 'Martes'),
+                  DropdownMenuItem(
+                      child: Text('Miercoles'), value: 'Miercoles'),
+                  DropdownMenuItem(child: Text('Jueves'), value: 'Jueves'),
+                  DropdownMenuItem(child: Text('Viernes'), value: 'Viernes'),
+                  DropdownMenuItem(child: Text('Sabado'), value: 'Sabado'),
+                  DropdownMenuItem(child: Text('Domingo'), value: 'Domingo'),
+                ],
+                hint: Text('Select day'),
+                onChanged: (value) {
+                  setState(() {
+                    _selectedDay = value;
+                  });
+                },
+              ),
+              const SizedBox(height: 10),
+              DropdownButtonFormField<int>(
+                value: _selectedSlot,
+                items: List.generate(24, (index) => index + 1)
+                    .map((slot) => DropdownMenuItem(
+                          child: Text('Slot $slot'),
+                          value: slot,
+                        ))
+                    .toList(),
+                hint: Text('Select slot'),
+                onChanged: (value) {
+                  setState(() {
+                    _selectedSlot = value;
+                  });
+                },
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (_selectedDay != null && _selectedSlot != null) {
+                  widget.onSelection(_selectedDay!, _selectedSlot!);
+                  Navigator.pop(context);
+                }
+              },
+              child: Text('Select'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

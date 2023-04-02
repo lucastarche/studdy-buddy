@@ -69,13 +69,9 @@ class CalendarHeatMap extends StatelessWidget {
     // Your logic to determine the color based on the value
     switch (value) {
       case 0:
-        return Colors.blueAccent; //horarios del chabon
-      case 1:
-        return Colors.green;
-      case 2:
-        return Colors.grey;
+        return Colors.green; //libres los dos
       default:
-        return Colors.red;
+        return Colors.grey; // libre alguno de los dos
     }
   }
 }

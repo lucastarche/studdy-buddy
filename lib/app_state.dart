@@ -40,7 +40,7 @@ class AppState extends ChangeNotifier {
   var emailNotificationsEnabled = false;
   var pushNotificationsEnabled = false;
   var restrictByInstitution = false;
-  var schedule = List.generate(7, (day) => List.filled(48, 0));
+  var schedule = List.generate(7, (day) => List.filled(24, 1));
   var subjects = [
     'analisis 1',
     'matematica 200',
@@ -144,6 +144,22 @@ class AppState extends ChangeNotifier {
     pfpSmall = NetworkImage(
         'https://cors-anywhere.herokuapp.com/${user.photoURL}',
         headers: {'X-Requested-With': 'XMLHttpRequest'});
+    updateSettingsObject();
+  }
+
+  void toggleSlot(String day, int slot) {
+    var days = [
+      'Lunes',
+      'Martes',
+      'Miercoles',
+      'Jueves',
+      'Viernes',
+      'Sabado',
+      'Domingo'
+    ];
+    //get index of day
+    var dayInd = days.indexOf(day);
+    schedule[dayInd][slot - 1] = 1 - schedule[dayInd][slot - 1];
     updateSettingsObject();
   }
 }
