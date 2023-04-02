@@ -82,15 +82,8 @@ class HomePage extends StatelessWidget {
     final myUser = state.username;
 
     final imageProvider = user.pfp.image;
-
     final pfp = CircleAvatar(backgroundImage: imageProvider);
-
-    SyncDialog(
-      context: context,
-      index: index,
-      user: user.name,
-      userImage: imageProvider,
-    ).show();
+    final chatIdx = state.chats.length;
 
     state.chats.add(ChatObject(
       messages: [
@@ -105,6 +98,13 @@ class HomePage extends StatelessWidget {
       chatPhoto: pfp,
       userPhoto: CircleAvatar(backgroundImage: state.pfpSmall),
     ));
+
+    SyncDialog(
+      context: context,
+      chatIndex: chatIdx,
+      user: user.name,
+      userImage: imageProvider,
+    ).show();
 
     state.removeCard(index);
   }

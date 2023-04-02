@@ -108,7 +108,7 @@ class AppState extends ChangeNotifier {
       String name, String pfpUrl, String description, List<String> prosArray) {
     return UserCardObject(
       name: name,
-      pfp: Image.asset(pfpUrl, height: 512, fit: BoxFit.cover),
+      pfp: Image.asset(pfpUrl, height: 460, fit: BoxFit.cover),
       description: description,
       prosArray: prosArray,
       schedule: schedule

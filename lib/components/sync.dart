@@ -4,13 +4,13 @@ import 'package:studdy_buddy/app_state.dart';
 
 class SyncDialog {
   final BuildContext context;
-  final int index;
+  final int chatIndex;
   final String user;
   final ImageProvider userImage;
 
   SyncDialog(
       {required this.context,
-      required this.index,
+      required this.chatIndex,
       required this.user,
       required this.userImage});
 
@@ -36,7 +36,7 @@ class SyncDialog {
                 top: 20,
                 right: 20,
                 child: IconButton(
-                  onPressed: _onDismiss,
+                  onPressed: () => Navigator.of(context).pop(),
                   icon: Icon(
                     Icons.close,
                     color: Colors.white,
@@ -109,5 +109,7 @@ class SyncDialog {
 
   void _onDismiss() {
     Navigator.of(context).pop();
+    Navigator.of(context).pushReplacementNamed("chat");
+    Navigator.pushNamed(context, "chatting-with", arguments: chatIndex);
   }
 }

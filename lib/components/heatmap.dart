@@ -8,18 +8,8 @@ class CalendarHeatMap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final style = theme.textTheme.displaySmall!.copyWith(
-      fontSize: 13,
-    );
-    final dias = [
-      'lunes',
-      'martes',
-      'miercoles',
-      'jueves',
-      'viernes',
-      'sabado',
-      'domingo'
-    ];
+    final style = theme.textTheme.headlineSmall;
+    final dias = ['LU', 'MA', 'MI', 'JU', 'VI', 'SA', 'DO'];
     var timeSlots = [];
     for (var i = 1; i <= 48; i++) {
       timeSlots.add("$i");
