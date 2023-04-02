@@ -33,13 +33,14 @@ class AppState extends ChangeNotifier {
         headers: {'X-Requested-With': 'XMLHttpRequest'}),
   );
   //Card Basic
-  final bigPhoto = Image.asset("assets/carlos.jpeg");
+  final bigPhoto = Image.asset("assets/carlos.jpg");
   //user information and preferences variables
   var email = 'charlescharles@gmail.com';
   var username = 'carlitos';
   var emailNotificationsEnabled = false;
   var pushNotificationsEnabled = false;
   var restrictByInstitution = false;
+  var schedule = List.generate(7, (day) => List.filled(48, 0));
   var subjects = [
     'analisis 1',
     'matematica 200',
@@ -94,7 +95,7 @@ class AppState extends ChangeNotifier {
     //Home
     cards = [
       UserCardObject(
-          name: 'carlos',
+          name: 'Carlos Miguel Soto, 21',
           pfp: bigPhoto,
           description:
               'Hola mi nombre es Carlos y soy un apasionado de las ciencias de la computacion, estoy cursando en FCEN y espero graduarme pronto. Con mi equipo fuimos ICPC LATAM Champions',

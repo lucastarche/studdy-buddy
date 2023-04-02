@@ -1,8 +1,10 @@
 import 'package:flip_card/flip_card.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:studdy_buddy/components/heatmap.dart';
 import 'user_card_object.dart';
+import 'package:provider/provider.dart';
+import 'package:studdy_buddy/app_state.dart';
+import 'package:studdy_buddy/components/heatmap.dart';
 
 class UserCard extends StatefulWidget {
   final UserCardObject cardBuilder;
@@ -17,6 +19,7 @@ class _UserCardState extends State<UserCard> {
 
   @override
   Widget build(BuildContext context) {
+    final state = Provider.of<AppState>(context);
     final theme = Theme.of(context);
     final style = theme.textTheme.displaySmall!.copyWith(
       color: Colors.white,
@@ -45,8 +48,7 @@ class _UserCardState extends State<UserCard> {
 
     final cardBack = GestureDetector(
       onDoubleTap: () => _controller.toggleCard(),
-      child:
-          CalendarHeatMap(data: List.generate(7, (day) => List.filled(24, 0))),
+      child: CalendarHeatMap(data: state.schedule),
     );
 
     return FlipCard(

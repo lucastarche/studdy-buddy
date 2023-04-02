@@ -13,7 +13,6 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = Provider.of<AppState>(context);
     final settings = state.sobj;
-
     return AppScaffold(
       appBar: AppBar(
         title: const Text('Settings'),
