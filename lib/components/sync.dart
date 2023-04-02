@@ -109,8 +109,5 @@ class SyncDialog {
 
   void _onDismiss() {
     Navigator.of(context).pop();
-
-    final state = Provider.of<AppState>(context, listen: false);
-    state.removeCard(index);
   }
 }

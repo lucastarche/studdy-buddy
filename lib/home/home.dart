@@ -18,6 +18,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final swipeController = AppinioSwiperController();
+
     final state = Provider.of<AppState>(context);
     final theme = Theme.of(context);
     final cards = state.cards;
@@ -26,6 +28,7 @@ class HomePage extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.9,
       width: 512.0,
       child: AppinioSwiper(
+        controller: swipeController,
         loop: true,
         cardsBuilder: (context, index) => UserCard(cardBuilder: cards[index]),
         cardsCount: cards.length,
@@ -41,6 +44,7 @@ class HomePage extends StatelessWidget {
 
             if (randomInt == 3) {
               _onSyncedWith(context, previousIndex);
+              swipeController.unswipe();
             }
           }
         },
@@ -101,5 +105,7 @@ class HomePage extends StatelessWidget {
       chatPhoto: pfp,
       userPhoto: CircleAvatar(backgroundImage: state.pfpSmall),
     ));
+
+    state.removeCard(index);
   }
 }
