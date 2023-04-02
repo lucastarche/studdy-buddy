@@ -259,7 +259,7 @@ class _DaySlotPickerState extends State<DaySlotPicker> {
                 value: _selectedSlot,
                 items: List.generate(24, (index) => index + 1)
                     .map((slot) => DropdownMenuItem(
-                          child: Text('Slot $slot'),
+                          child: Text('$slot'),
                           value: slot,
                         ))
                     .toList(),

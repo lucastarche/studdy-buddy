@@ -46,9 +46,28 @@ class _UserCardState extends State<UserCard> {
       ),
     );
 
+    List<List<int>> add2D(List<List<int>> a, List<List<int>> b) {
+      assert(a.length == b.length);
+      assert(a.isNotEmpty && a.first.isNotEmpty);
+      assert(b.isNotEmpty && b.first.isNotEmpty);
+      assert(a.length == b.length && a.first.length == b.first.length);
+
+      final result =
+          List.generate(a.length, (_) => List<int>.filled(a.first.length, 0));
+
+      for (var i = 0; i < a.length; i++) {
+        for (var j = 0; j < a.first.length; j++) {
+          result[i][j] = a[i][j] + b[i][j];
+        }
+      }
+
+      return result;
+    }
+
     final cardBack = GestureDetector(
       onDoubleTap: () => _controller.toggleCard(),
-      child: CalendarHeatMap(data: state.schedule),
+      child: CalendarHeatMap(
+          data: add2D(state.schedule, widget.cardBuilder.schedule)),
     );
 
     return FlipCard(

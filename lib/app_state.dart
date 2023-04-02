@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -95,16 +97,24 @@ class AppState extends ChangeNotifier {
     //Home
     cards = [
       UserCardObject(
-          name: 'Carlos Miguel Soto, 21',
-          pfp: bigPhoto,
-          description:
-              'Hola mi nombre es Carlos y soy un apasionado de las ciencias de la computacion, estoy cursando en FCEN y espero graduarme pronto. Con mi equipo fuimos ICPC LATAM Champions',
-          prosArray: [
-            'Va a la misma universidad que vos',
-            'Vive a 5km',
-            'Cursa Analisis',
-            'Le gusta el Ajedrez'
-          ]),
+        name: 'Carlos Miguel Soto, 21',
+        pfp: bigPhoto,
+        description:
+            'Hola mi nombre es Carlos y soy un apasionado de las ciencias de la computacion, estoy cursando en FCEN y espero graduarme pronto. Con mi equipo fuimos ICPC LATAM Champions',
+        prosArray: [
+          'Va a la misma universidad que vos',
+          'Vive a 5km',
+          'Cursa Analisis',
+          'Le gusta el Ajedrez'
+        ],
+        schedule: schedule
+            .map((row) => row
+                .map((value) => value == 0
+                    ? (Random().nextBool() ? 1 : 0)
+                    : (Random().nextBool() ? 0 : 1))
+                .toList())
+            .toList(),
+      ),
     ];
     //Settings
     sobj = SettingsObject(
