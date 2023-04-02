@@ -72,13 +72,11 @@ class _UserCardState extends State<UserCard> {
 
     return FlipCard(
       front: Card(
-        elevation: 10,
         color: Colors.white,
         margin: EdgeInsets.zero,
         child: cardFront,
       ),
       back: Card(
-        elevation: 10,
         color: Colors.white,
         margin: EdgeInsets.zero,
         child: cardBack,
@@ -143,6 +141,7 @@ class UserInformation extends StatelessWidget {
           child: Text(
             description,
             softWrap: true,
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
         const Flexible(

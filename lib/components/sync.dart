@@ -23,6 +23,7 @@ class SyncDialog {
         ),
         child: Container(
           height: 700,
+          width: 500,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16.0),
             image: DecorationImage(

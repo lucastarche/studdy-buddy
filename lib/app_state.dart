@@ -67,13 +67,8 @@ class AppState extends ChangeNotifier {
       createCardObject(
         "Carlos Miguel Soto",
         "assets/carlos.jpg",
-        "Hola mi nombre es Carlos y soy un apasionado de las ciencias de la computacion, estoy cursando en FCEN y espero graduarme pronto. Con mi equipo fuimos ICPC LATAM Champions",
-        [
-          'Va a la misma universidad que vos',
-          'Vive a 5km',
-          'Cursa Analisis',
-          'Le gusta el Ajedrez'
-        ],
+        "Hola mi nombre es Carlos y soy un apasionado de las ciencias de la computacion, estoy cursando en FCEN, espero graduarme pronto",
+        ['Misma universidad', 'Vive a 5km', 'Cursa Analisis'],
       ),
       createCardObject(
         "Ivan",
@@ -108,7 +103,7 @@ class AppState extends ChangeNotifier {
       String name, String pfpUrl, String description, List<String> prosArray) {
     return UserCardObject(
       name: name,
-      pfp: Image.asset(pfpUrl, height: 460, fit: BoxFit.cover),
+      pfp: Image.asset(pfpUrl, height: 400, fit: BoxFit.cover),
       description: description,
       prosArray: prosArray,
       schedule: schedule
