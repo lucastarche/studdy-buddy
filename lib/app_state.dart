@@ -68,14 +68,14 @@ class AppState extends ChangeNotifier {
         "Carlos Miguel Soto",
         "assets/carlos.jpg",
         "Hola mi nombre es Carlos y soy un apasionado de las ciencias de la computacion, estoy cursando en FCEN, espero graduarme pronto",
-        ['Misma universidad', 'Vive a 5km', 'Cursa Analisis'],
+        ['Misma facultad', 'Vive a 5km', 'Cursa Analisis'],
       ),
       createCardObject(
         "Ivan",
         "assets/IvoP.jpg",
         "Soy Ivan, pero me dicen Ivo",
         [
-          'Va a la misma universidad que vos',
+          'Misma facultad',
           'Vive a 2km',
         ],
       ),
@@ -83,7 +83,7 @@ class AppState extends ChangeNotifier {
           "Manuela",
           "assets/zylber.jpg",
           "Soy Manuela Gomez Pazos, y estoy aprendiendo a programar. Necesito alguien con quien aprender algebra lineal",
-          ['Cursa Algebra Lineal', 'Le gustan los carpinchos']),
+          ['Cursa Algebra', 'Ama los gatos']),
     ];
 
     //Settings

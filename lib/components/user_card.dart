@@ -70,17 +70,11 @@ class _UserCardState extends State<UserCard> {
           data: add2D(state.schedule, widget.cardBuilder.schedule)),
     );
 
-    return FlipCard(
-      front: Card(
-        color: Colors.white,
-        margin: EdgeInsets.zero,
-        child: cardFront,
-      ),
-      back: Card(
-        color: Colors.white,
-        margin: EdgeInsets.zero,
-        child: cardBack,
-      ),
+    return Card(
+      color: Colors.white,
+      margin: EdgeInsets.zero,
+      child: cardFront,
+      elevation: 10,
     );
   }
 }
