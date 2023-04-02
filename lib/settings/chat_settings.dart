@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studdy_buddy/app_state.dart';
+import 'package:studdy_buddy/components/heatmap.dart';
 
 import '../components/app_scaffold.dart';
 
@@ -57,6 +58,13 @@ class SettingsPage extends StatelessWidget {
               onChanged: (value) {
                 // TODO: implement toggle for restrictByInstitution
               },
+            ),
+            Center(
+              child: SizedBox(
+                child: CalendarHeatMap(data: state.schedule),
+                width: 500,
+                height: 500,
+              ),
             ),
             const SizedBox(height: 16.0),
             Text(

@@ -7,10 +7,43 @@ class CalendarHeatMap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final style = theme.textTheme.displaySmall!.copyWith(
+      fontSize: 13,
+    );
+    final dias = [
+      'lunes',
+      'martes',
+      'miercoles',
+      'jueves',
+      'viernes',
+      'sabado',
+      'domingo'
+    ];
+    var timeSlots = [];
+    for (var i = 1; i <= 48; i++) {
+      timeSlots.add("$i");
+    }
     return Padding(
       padding: const EdgeInsets.all(30.0),
       child: Column(
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: dias
+                .map((e) => Expanded(
+                        child: Center(
+                      child: Text(
+                        e,
+                        style: style,
+                      ),
+                    )))
+                .toList(),
+          ),
+          const SizedBox(
+            height: 10,
+            width: 10,
+          ),
           for (int i = 0; i < 24; i++)
             Expanded(
               child: Row(

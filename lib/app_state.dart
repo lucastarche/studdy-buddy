@@ -24,12 +24,12 @@ class AppState extends ChangeNotifier {
   }
 
   //general
-  var pfpSmall = const NetworkImage('http://via.placerholder/100x100',
+  var pfpSmall = const NetworkImage('http://via.placeholder/100x100',
       headers: {'X-Requested-With': 'XMLHttpRequest'});
   //Chat Basic
   // ignore: prefer_const_constructors
   final dummyPhoto = CircleAvatar(
-    backgroundImage: const NetworkImage('http://via.placerholder/100x100',
+    backgroundImage: const NetworkImage('http://via.placeholder/100x100',
         headers: {'X-Requested-With': 'XMLHttpRequest'}),
   );
   //Card Basic
