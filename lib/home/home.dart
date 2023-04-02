@@ -1,11 +1,13 @@
 import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:studdy_buddy/components/chat_object.dart';
 import 'package:studdy_buddy/components/user_card.dart';
 import 'package:studdy_buddy/app_state.dart';
 import 'dart:math';
 
 import '../components/app_scaffold.dart';
+import '../components/message.dart';
 import '../components/sync.dart';
 
 // ignore: must_be_immutable
@@ -18,6 +20,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = Provider.of<AppState>(context);
     final cards = state.cards;
+
     return AppScaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -40,7 +43,7 @@ class HomePage extends StatelessWidget {
                       final randomInt = random.nextInt(4);
                       // Do something with the randomInt
                       if (randomInt == 3) {
-                        SyncDialog(context: context, user: "Carlos").show();
+                        _onSyncedWith(context, index);
                       }
                     }
                   },
@@ -51,5 +54,27 @@ class HomePage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _onSyncedWith(BuildContext context, int index) {
+    final state = Provider.of<AppState>(context, listen: false);
+    final user = state.cards[index];
+    final myUser = state.username;
+
+    final pfp = CircleAvatar(backgroundImage: user.pfp.image);
+
+    SyncDialog(context: context, user: user.name).show();
+    state.chats.add(ChatObject(
+      messages: [
+        Message(
+          username: user.name,
+          data: "Hola, soy ${user.name}!",
+          chatPhoto: pfp,
+        ),
+      ],
+      chatName: user.name,
+      user: myUser,
+      chatPhoto: pfp,
+    ));
   }
 }

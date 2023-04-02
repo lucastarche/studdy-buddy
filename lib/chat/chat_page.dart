@@ -39,6 +39,7 @@ class ChatOption extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = Provider.of<AppState>(context);
     final chat = state.chats[chatInd];
+
     return GestureDetector(
       onTap: () =>
           Navigator.pushNamed(context, "chatting-with", arguments: chatInd),
@@ -57,10 +58,7 @@ class ChatOption extends StatelessWidget {
         ),
         child: Row(
           children: [
-            const CircleAvatar(
-              backgroundImage: AssetImage("assets/64x64.png"),
-              radius: 24.0,
-            ),
+            chat.chatPhoto,
             const SizedBox(
               width: 16.0,
             ),

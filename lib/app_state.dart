@@ -56,50 +56,12 @@ class AppState extends ChangeNotifier {
   ];
   var maxDistance = 4.0;
   ////////////
-  late final List<ChatObject> chats;
+  final List<ChatObject> chats = [];
   late final List<UserCardObject> cards;
   var sobj;
 
   AppState() {
     init();
-
-    //Chat
-    chats = [
-      ChatObject(
-        messages: [
-          Message(
-            data: "hola",
-            username: "carlitos",
-            chatPhoto: dummyPhoto,
-          ),
-          Message(
-            data: "hola carlitos",
-            username: "elsantodel90",
-            chatPhoto: dummyPhoto,
-          ),
-        ],
-        chatName: 'chat con agustin',
-        user: 'carlitos',
-        chatPhoto: dummyPhoto,
-      ),
-      ChatObject(
-        messages: [
-          Message(
-            data: "hola",
-            username: "carlitos",
-            chatPhoto: dummyPhoto,
-          ),
-          Message(
-            data: "hola carlitos",
-            username: "elsantodel90",
-            chatPhoto: dummyPhoto,
-          ),
-        ],
-        chatName: 'chat con agustin 2',
-        user: 'carlitos',
-        chatPhoto: dummyPhoto,
-      ),
-    ];
     //Home
     cards = [
       UserCardObject(
@@ -122,6 +84,7 @@ class AppState extends ChangeNotifier {
             .toList(),
       ),
     ];
+
     //Settings
     sobj = SettingsObject(
       email: email,
