@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studdy_buddy/components/user_card.dart';
 import 'package:studdy_buddy/app_state.dart';
+import 'dart:math';
 
 import '../components/app_scaffold.dart';
+import '../components/sync.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatelessWidget {
@@ -32,6 +34,16 @@ class HomePage extends StatelessWidget {
                       UserCard(cardBuilder: cards[index]),
                   cardsCount: cards.length,
                   swipeOptions: AppinioSwipeOptions.horizontal,
+                  onSwipe: (index, direction) {
+                    if (direction == AppinioSwiperDirection.right) {
+                      final random = Random();
+                      final randomInt = random.nextInt(4);
+                      // Do something with the randomInt
+                      if (randomInt == 3) {
+                        SyncDialog(context: context, user: "Carlos").show();
+                      }
+                    }
+                  },
                 ),
               ),
             ],

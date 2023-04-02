@@ -42,7 +42,13 @@ class AppState extends ChangeNotifier {
   var emailNotificationsEnabled = false;
   var pushNotificationsEnabled = false;
   var restrictByInstitution = false;
-  var schedule = List.generate(7, (day) => List.filled(24, 1));
+  var schedule = (List.generate(7, (day) => List.filled(24, 1)))
+      .map((row) => row
+          .map((value) => value == 0
+              ? (Random().nextBool() ? 1 : 0)
+              : (Random().nextBool() ? 0 : 1))
+          .toList())
+      .toList();
   var subjects = [
     'analisis 1',
     'matematica 200',
