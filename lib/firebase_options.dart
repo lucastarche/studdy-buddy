@@ -4,6 +4,9 @@ import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
 
+const googleClientID =
+    "142157161775-2d2bejv4blh88pbe604th993mj5ab5s3.apps.googleusercontent.com";
+
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
 /// Example:
@@ -66,7 +69,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '142157161775',
     projectId: 'studdy-buddy-d7db3',
     storageBucket: 'studdy-buddy-d7db3.appspot.com',
-    iosClientId: '142157161775-rh9hibbpjhranui1kal3cfvlb56r9tio.apps.googleusercontent.com',
+    iosClientId:
+        '142157161775-rh9hibbpjhranui1kal3cfvlb56r9tio.apps.googleusercontent.com',
     iosBundleId: 'com.example.studdyBuddy',
   );
 
@@ -76,7 +80,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '142157161775',
     projectId: 'studdy-buddy-d7db3',
     storageBucket: 'studdy-buddy-d7db3.appspot.com',
-    iosClientId: '142157161775-rh9hibbpjhranui1kal3cfvlb56r9tio.apps.googleusercontent.com',
+    iosClientId:
+        '142157161775-rh9hibbpjhranui1kal3cfvlb56r9tio.apps.googleusercontent.com',
     iosBundleId: 'com.example.studdyBuddy',
   );
 }

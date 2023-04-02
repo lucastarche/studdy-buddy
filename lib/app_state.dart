@@ -1,10 +1,27 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
-import 'package:studdy_buddy/components/chat_object.dart';
-import 'package:studdy_buddy/components/message.dart';
-import 'package:studdy_buddy/components/settings_object.dart';
-import 'package:studdy_buddy/components/user_card_object.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+
+import 'firebase_options.dart';
 
 class AppState extends ChangeNotifier {
+  bool _loggedIn = false;
+  bool get loggedIn => _loggedIn;
+
+  void init() {
+    FirebaseAuth.instance.userChanges().listen((user) {
+      if (user != null) {
+        _loggedIn = true;
+      } else {
+        _loggedIn = false;
+      }
+
+      print(_loggedIn);
+      notifyListeners();
+    });
+    
   //general
   final pfpSmall = const NetworkImage('https://via.placerholder/100x100');
   //Chat Basic
@@ -18,6 +35,8 @@ class AppState extends ChangeNotifier {
   late final SettingsObject sobj;
 
   AppState() {
+    init();
+    
     //Chat
     chats = [
       ChatObject(
