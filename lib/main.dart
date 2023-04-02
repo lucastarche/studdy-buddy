@@ -6,11 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studdy_buddy/app_state.dart';
 import 'package:studdy_buddy/chat/chat_page.dart';
-import 'package:studdy_buddy/components/app_scaffold.dart';
+import 'package:studdy_buddy/components/chat.dart';
+import 'package:studdy_buddy/components/chat_object.dart';
 import 'package:studdy_buddy/home/home.dart';
 import 'package:studdy_buddy/login/login.dart';
 import 'package:studdy_buddy/routes.dart';
-
+import 'package:studdy_buddy/settings/chat_settings.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -24,10 +25,7 @@ void main() async {
     ),
   ]);
 
-  runApp(ChangeNotifierProvider<ApplicationState>(
-    create: (context) => ApplicationState(),
-    child: const StuddyBuddyApp(),
-  ));
+  runApp(const StuddyBuddyApp());
 }
 
 class StuddyBuddyApp extends StatelessWidget {
@@ -45,19 +43,36 @@ class StuddyBuddyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Studdy Buddy!',
-      theme: ThemeData(
-        // This is the theme of your application.
-        primarySwatch: Colors.blue,
+    return ChangeNotifierProvider<AppState>(
+      create: (context) => AppState(),
+      child: MaterialApp(
+        title: 'Studdy Buddy!',
+        theme: ThemeData(
+          // This is the theme of your application.
+          primarySwatch: Colors.blue,
+        ),
+        initialRoute: initialRoute,
+        routes: {
+          Routes.login.name: (context) => const LoginPage(),
+          Routes.home.name: (context) => const HomePage(),
+          Routes.settings.name: (context) => const SettingsPage(),
+          Routes.chat.name: (context) => const ChatPage(),
+        },
+        onGenerateRoute: (settings) {
+          if (settings.name == "chatting-with") {
+            final args = settings.arguments as int;
+            return MaterialPageRoute(
+              builder: (context) => Scaffold(
+                body: Chat(
+                  chatInd: args,
+                ),
+              ),
+            );
+          }
+
+          return null;
+        },
       ),
-      initialRoute: initialRoute,
-      routes: {
-        Routes.login.name: (context) => const LoginPage(),
-        Routes.home.name: (context) => const HomePage(),
-        Routes.settings.name: (context) => const AppScaffold(),
-        Routes.chat.name: (context) => const ChatPage(),
-      },
     );
   }
 }

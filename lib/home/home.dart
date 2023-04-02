@@ -1,36 +1,42 @@
+import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:studdy_buddy/components/app_scaffold.dart';
+import 'package:provider/provider.dart';
+import 'package:studdy_buddy/components/user_card.dart';
+import 'package:studdy_buddy/app_state.dart';
 
-import '../components/user_card.dart';
+import '../components/app_scaffold.dart';
 
+// ignore: must_be_immutable
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final state = Provider.of<AppState>(context);
+    final cards = state.cards;
     return AppScaffold(
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Column(
-              children: [
-                UserCard(
-                  name: "Charles Miguel Soto, 20",
-                  pfp: Image.network('http://via.placeholder.com/500x600'),
-                  description:
-                      '''Soy un estudiante universitario de ingeniería informática apasionado por la tecnología y su capacidad para transformar el mundo. Actualmente, estoy en mi último año de carrera y espero graduarme próximamente.''',
-                  prosArray: const [
-                    "misma universidad",
-                    "no misma universidad",
-                    "no se que poner",
-                    "se que poner"
-                  ],
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.9,
+                width: 512.0,
+                child: AppinioSwiper(
+                  loop: true,
+                  cardsBuilder: (context, index) =>
+                      UserCard(cardBuilder: cards[index]),
+                  cardsCount: cards.length,
+                  swipeOptions: AppinioSwipeOptions.horizontal,
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
